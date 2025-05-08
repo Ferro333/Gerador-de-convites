@@ -2,68 +2,101 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('invitationForm');
     const preview = document.getElementById('invitationPreview');
     const downloadBtn = document.getElementById('downloadBtn');
+    let coverImageData = '';
+
+    // Preview da imagem de capa
+    const coverInput = document.getElementById('coverImage');
+    if (coverInput) {
+        coverInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    coverImageData = evt.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                coverImageData = '';
+            }
+        });
+    }
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         
-        // Get form values
-        const eventName = document.getElementById('eventName').value;
-        const eventDate = new Date(document.getElementById('eventDate').value);
-        const eventLocation = document.getElementById('eventLocation').value;
-        const hostName = document.getElementById('hostName').value;
-        const guestName = document.getElementById('guestName').value;
-        const theme = document.getElementById('theme').value;
+        // Dados do formulário
+        const eventName = form.eventName.value;
+        const eventStart = form.eventStart.value;
+        const eventEnd = form.eventEnd.value;
+        const eventType = form.eventType.value;
+        const eventLocation = form.eventLocation.value;
+        const eventDescription = form.eventDescription.value;
+        const mainColor = form.mainColor.value;
+        const theme = form.theme.value;
+        const style = form.style.value;
+        const contactName = form.contactName.value;
+        const contactEmail = form.contactEmail.value;
+        const contactPhone = form.contactPhone.value;
 
-        // Format date
-        const formattedDate = eventDate.toLocaleDateString('pt-BR', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
+        // Formatação de datas
+        const startDate = eventStart ? new Date(eventStart).toLocaleDateString('pt-BR') : '';
+        const endDate = eventEnd ? new Date(eventEnd).toLocaleDateString('pt-BR') : '';
 
-        // Update preview
-        document.getElementById('previewEventName').textContent = eventName;
-        document.getElementById('previewDate').textContent = formattedDate;
-        document.getElementById('previewLocation').textContent = `Local: ${eventLocation}`;
-        document.getElementById('previewHost').textContent = `Anfitrião: ${hostName}`;
-        document.getElementById('previewGuest').textContent = `Convidado: ${guestName}`;
+        // Ícone do tema
+        const themeIcons = {
+            aniversario: 'https://img.icons8.com/color/96/party-balloons.png',
+            infantil: 'https://img.icons8.com/color/96/birthday-cake.png',
+            formatura: 'https://img.icons8.com/color/96/graduation-cap.png',
+            casamento: 'https://img.icons8.com/color/96/wedding.png',
+            'cha-bebe': 'https://img.icons8.com/color/96/baby-bottle.png',
+            'cha-panela': 'https://img.icons8.com/color/96/teapot.png',
+            carnaval: 'https://img.icons8.com/color/96/confetti.png',
+            pascoa: 'https://img.icons8.com/color/96/easter-egg.png',
+            'sao-joao': 'https://img.icons8.com/color/96/firework-rocket.png',
+            halloween: 'https://img.icons8.com/color/96/halloween.png',
+            natal: 'https://img.icons8.com/color/96/christmas-star.png',
+            outro: 'https://img.icons8.com/color/96/question-mark.png',
+        };
 
-        // Apply theme
-        preview.className = `invitation-preview theme-${theme}`;
-
-        // Show preview
+        // Monta o HTML do preview
+        preview.innerHTML = `
+            <div class="convite-preview-box ${style}" style="--main-color: ${mainColor};">
+                ${coverImageData ? `<div class="convite-capa"><img src="${coverImageData}" alt="Capa do evento"></div>` : ''}
+                <div class="convite-theme-icon"><img src="${themeIcons[theme]}" alt="Tema"></div>
+                <h2 class="convite-title">${eventName || 'Seu Evento'}</h2>
+                <div class="convite-info">
+                    <span><i class="fa-regular fa-calendar"></i> ${startDate}${endDate ? ' a ' + endDate : ''}</span>
+                    <span><i class="fa-solid fa-location-dot"></i> ${eventLocation || (eventType === 'Online' ? 'Online' : 'Local a definir')}</span>
+                    <span><i class="fa-solid fa-user"></i> ${contactName}</span>
+                </div>
+                <div class="convite-desc">${eventDescription ? eventDescription : ''}</div>
+                <div class="convite-footer">
+                    <span>${contactEmail ? `<i class='fa-solid fa-envelope'></i> ${contactEmail}` : ''}</span>
+                    <span>${contactPhone ? `<i class='fa-solid fa-phone'></i> ${contactPhone}` : ''}</span>
+                </div>
+            </div>
+        `;
         preview.classList.remove('hidden');
+        if (downloadBtn) downloadBtn.style.display = 'block';
     });
 
-    downloadBtn.addEventListener('click', async () => {
-        try {
-            const previewContent = document.querySelector('.preview-content');
-            
-            // Configure html2canvas options
-            const options = {
-                scale: 2, // Higher quality
-                backgroundColor: null,
-                logging: false,
-                useCORS: true
-            };
-
-            // Capture the preview content
-            const canvas = await html2canvas(previewContent, options);
-            
-            // Convert to image
-            const image = canvas.toDataURL('image/png', 1.0);
-            
-            // Create and trigger download
-            const link = document.createElement('a');
-            link.download = `convite-${new Date().getTime()}.png`;
-            link.href = image;
-            link.click();
-        } catch (error) {
-            console.error('Erro ao gerar o convite:', error);
-            alert('Ocorreu um erro ao gerar o convite. Por favor, tente novamente.');
-        }
-    });
+    // Download do convite como imagem
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', async () => {
+            const conviteBox = preview.querySelector('.convite-preview-box');
+            if (!conviteBox) return;
+            downloadBtn.classList.add('loading');
+            try {
+                const canvas = await html2canvas(conviteBox, { backgroundColor: null, scale: 2 });
+                const image = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.download = 'convite.png';
+                link.href = image;
+                link.click();
+            } catch (err) {
+                alert('Erro ao gerar a imagem do convite.');
+            }
+            downloadBtn.classList.remove('loading');
+        });
+    }
 }); 

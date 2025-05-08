@@ -7,68 +7,110 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Gerador de Convites</h1>
-            <p>Crie seu convite personalizado para eventos</p>
-        </header>
-
-        <main>
-            <form id="invitationForm">
+<body class="dark">
+    <div class="container dark-container">
+        <form id="invitationForm" class="modern-form">
+            <div class="form-section">
+                <h2 class="section-title"><i class="fa-regular fa-calendar"></i> Sobre o evento</h2>
                 <div class="form-group">
-                    <label for="eventName">Nome do Evento</label>
-                    <input type="text" id="eventName" name="eventName" placeholder="Ex: Aniversário de 30 anos" required>
+                    <label for="eventName">Título</label>
+                    <input type="text" id="eventName" name="eventName" placeholder="Nome do evento" required>
                 </div>
-
-                <div class="form-group">
-                    <label for="eventDate">Data do Evento</label>
-                    <input type="datetime-local" id="eventDate" name="eventDate" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="eventLocation">Local do Evento</label>
-                    <input type="text" id="eventLocation" name="eventLocation" placeholder="Ex: Espaço de Eventos XYZ" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="hostName">Nome do Anfitrião</label>
-                    <input type="text" id="hostName" name="hostName" placeholder="Ex: Maria Silva" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="guestName">Nome do Convidado</label>
-                    <input type="text" id="guestName" name="guestName" placeholder="Ex: João Santos" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="theme">Tema do Convite</label>
-                    <select id="theme" name="theme">
-                        <option value="elegant">Elegante</option>
-                        <option value="modern">Moderno</option>
-                        <option value="classic">Clássico</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="generate-btn">Gerar Convite</button>
-            </form>
-
-            <div id="invitationPreview" class="invitation-preview hidden">
-                <div class="preview-content">
-                    <div class="preview-header">
-                        <h2 id="previewEventName"></h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventStart">Início</label>
+                        <input type="date" id="eventStart" name="eventStart" required>
                     </div>
-                    <div class="preview-details">
-                        <p id="previewDate"></p>
-                        <p id="previewLocation"></p>
-                        <p id="previewHost"></p>
-                        <p id="previewGuest"></p>
+                    <div class="form-group">
+                        <label for="eventEnd">Fim</label>
+                        <input type="date" id="eventEnd" name="eventEnd">
                     </div>
                 </div>
-                <button id="downloadBtn" class="download-btn">Baixar Convite</button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tipo</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="eventType" value="Presencial" checked> Presencial</label>
+                            <label><input type="radio" name="eventType" value="Online"> Online</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventLocation">Local</label>
+                        <input type="text" id="eventLocation" name="eventLocation" placeholder="Link ou endereço">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="eventDescription">Descrição</label>
+                    <textarea id="eventDescription" name="eventDescription" placeholder="Escreva sobre os detalhes do evento"></textarea>
+                </div>
             </div>
-        </main>
+            <div class="form-section">
+                <h2 class="section-title"><i class="fa-solid fa-palette"></i> Personalização</h2>
+                <div class="color-palette">
+                    <input type="radio" name="mainColor" value="#a259ff" id="color1" checked><label for="color1" style="background:#a259ff"></label>
+                    <input type="radio" name="mainColor" value="#f24e1e" id="color2"><label for="color2" style="background:#f24e1e"></label>
+                    <input type="radio" name="mainColor" value="#ff7262" id="color3"><label for="color3" style="background:#ff7262"></label>
+                    <input type="radio" name="mainColor" value="#1abcfe" id="color4"><label for="color4" style="background:#1abcfe"></label>
+                    <input type="radio" name="mainColor" value="#05c46b" id="color5"><label for="color5" style="background:#05c46b"></label>
+                    <input type="radio" name="mainColor" value="#fed330" id="color6"><label for="color6" style="background:#fed330"></label>
+                    <input type="radio" name="mainColor" value="#f7b731" id="color7"><label for="color7" style="background:#f7b731"></label>
+                    <input type="radio" name="mainColor" value="#0be881" id="color8"><label for="color8" style="background:#0be881"></label>
+                </div>
+                <div class="themes-grid">
+                    <div class="theme-option"><input type="radio" name="theme" value="aniversario" id="theme1" checked><label for="theme1"><img src="https://img.icons8.com/color/96/party-balloons.png" alt="Aniversário"><span>Aniversário</span></label></div>
+                    <div class="theme-option"><input type="radio" name="theme" value="infantil" id="theme2"><label for="theme2"><img src="https://img.icons8.com/color/96/birthday-cake.png" alt="Infantil"><span>Infantil</span></label></div>
+                    <div class="theme-option"><input type="radio" name="theme" value="formatura" id="theme3"><label for="theme3"><img src="https://img.icons8.com/color/96/graduation-cap.png" alt="Formatura"><span>Formatura</span></label></div>
+                    <div class="theme-option"><input type="radio" name="theme" value="casamento" id="theme4"><label for="theme4"><img src="https://img.icons8.com/color/96/wedding.png" alt="Casamento"><span>Casamento</span></label></div>
+                    <div class="theme-option"><input type="radio" name="theme" value="cha-bebe" id="theme5"><label for="theme5"><img src="https://img.icons8.com/color/96/baby-bottle.png" alt="Chá de bebê"><span>Chá de bebê</span></label></div>
+                    <div class="theme-option"><input type="radio" name="theme" value="cha-panela" id="theme6"><label for="theme6"><img src="https://img.icons8.com/color/96/teapot.png" alt="Chá de panela"><span>Chá de panela</span></label></div>
+                    <div class="theme-option"><input type="radio" name="theme" value="carnaval" id="theme7"><label for="theme7"><img src="https://img.icons8.com/color/96/confetti.png" alt="Carnaval"><span>Carnaval</span></label></div>
+                    <div class="theme-option"><input type="radio" name="theme" value="pascoa" id="theme8"><label for="theme8"><img src="https://img.icons8.com/color/96/easter-egg.png" alt="Páscoa"><span>Páscoa</span></label></div>
+                    <div class="theme-option"><input type="radio" name="theme" value="sao-joao" id="theme9"><label for="theme9"><img src="https://img.icons8.com/color/96/firework-rocket.png" alt="São João"><span>São João</span></label></div>
+                    <div class="theme-option"><input type="radio" name="theme" value="halloween" id="theme10"><label for="theme10"><img src="https://img.icons8.com/color/96/halloween.png" alt="Halloween"><span>Halloween</span></label></div>
+                    <div class="theme-option"><input type="radio" name="theme" value="natal" id="theme11"><label for="theme11"><img src="https://img.icons8.com/color/96/christmas-star.png" alt="Natal"><span>Natal</span></label></div>
+                    <div class="theme-option"><input type="radio" name="theme" value="outro" id="theme12"><label for="theme12"><img src="https://img.icons8.com/color/96/question-mark.png" alt="Outro"><span>Outro</span></label></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Estilo</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="style" value="escuro" checked> Escuro</label>
+                            <label><input type="radio" name="style" value="claro"> Claro</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="coverImage">Foto de capa</label>
+                        <input type="file" id="coverImage" name="coverImage" accept="image/*">
+                    </div>
+                </div>
+                <h2 class="section-title"><i class="fa-regular fa-address-card"></i> Dados para contato</h2>
+                <div class="form-group">
+                    <label for="contactName">Nome</label>
+                    <input type="text" id="contactName" name="contactName" placeholder="Nome completo" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contactEmail">E-mail</label>
+                        <input type="email" id="contactEmail" name="contactEmail" placeholder="exemplo@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Telefone</label>
+                        <input type="tel" id="contactPhone" name="contactPhone" placeholder="(99) 99999-9999">
+                    </div>
+                </div>
+                <div class="form-group check-group">
+                    <label><input type="checkbox" required> Li e concordo com os <a href="#">Termos e Condições</a> e com a <a href="#">Política de Privacidade</a></label>
+                    <label><input type="checkbox"> Aceito receber atualizações e promoções por email</label>
+                    <label><input type="checkbox"> Aceito receber atualizações e promoções por SMS</label>
+                </div>
+            </div>
+            <div style="flex-basis: 100%; height: 0;"></div>
+            <button type="submit" class="generate-btn full-width"><i class="fa-solid fa-paper-plane"></i> Gerar convite</button>
+        </form>
+        <div id="invitationPreview" class="invitation-preview hidden"></div>
+        <button id="downloadBtn" class="download-btn full-width" style="margin-top:1.5rem;display:none"><i class="fa-solid fa-download"></i> Baixar convite</button>
     </div>
     <script src="script.js"></script>
 </body>

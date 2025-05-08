@@ -19,7 +19,7 @@
             <form id="invitationForm">
                 <div class="form-group">
                     <label for="eventName">Nome do Evento</label>
-                    <input type="text" id="eventName" name="eventName" required>
+                    <input type="text" id="eventName" name="eventName" placeholder="Ex: Aniversário de 30 anos" required>
                 </div>
 
                 <div class="form-group">
@@ -29,17 +29,17 @@
 
                 <div class="form-group">
                     <label for="eventLocation">Local do Evento</label>
-                    <input type="text" id="eventLocation" name="eventLocation" required>
+                    <input type="text" id="eventLocation" name="eventLocation" placeholder="Ex: Espaço de Eventos XYZ" required>
                 </div>
 
                 <div class="form-group">
                     <label for="hostName">Nome do Anfitrião</label>
-                    <input type="text" id="hostName" name="hostName" required>
+                    <input type="text" id="hostName" name="hostName" placeholder="Ex: Maria Silva" required>
                 </div>
 
                 <div class="form-group">
                     <label for="guestName">Nome do Convidado</label>
-                    <input type="text" id="guestName" name="guestName" required>
+                    <input type="text" id="guestName" name="guestName" placeholder="Ex: João Santos" required>
                 </div>
 
                 <div class="form-group">
@@ -56,11 +56,15 @@
 
             <div id="invitationPreview" class="invitation-preview hidden">
                 <div class="preview-content">
-                    <h2 id="previewEventName"></h2>
-                    <p id="previewDate"></p>
-                    <p id="previewLocation"></p>
-                    <p id="previewHost"></p>
-                    <p id="previewGuest"></p>
+                    <div class="preview-header">
+                        <h2 id="previewEventName"></h2>
+                    </div>
+                    <div class="preview-details">
+                        <p id="previewDate"></p>
+                        <p id="previewLocation"></p>
+                        <p id="previewHost"></p>
+                        <p id="previewGuest"></p>
+                    </div>
                 </div>
                 <button id="downloadBtn" class="download-btn">Baixar Convite</button>
             </div>

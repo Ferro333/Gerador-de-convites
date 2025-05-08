@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.generate-btn, .download-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.generate-btn:hover, .download-btn:hover {
+    background: #2980b9;
+}
+
+.invitation-preview {
+    margin-top: 3rem;
+    padding: 2rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.preview-content {
+    margin-bottom: 2rem;
+}
+
+.preview-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.preview-content p {
+    margin: 0.5rem 0;
+    color: #34495e;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Theme Styles */
+.theme-elegant {
+    background: #fff;
+    color: #2c3e50;
+    font-family: 'Playfair Display', serif;
+}
+
+.theme-modern {
+    background: #f8f9fa;
+    color: #212529;
+    font-family: 'Roboto', sans-serif;
+}
+
+.theme-classic {
+    background: #fdf6e3;
+    color: #586e75;
+    font-family: 'Playfair Display', serif;
+} 

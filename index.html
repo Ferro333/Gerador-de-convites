@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Convites</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gerador de Convites</h1>
+            <p>Crie seu convite personalizado para eventos</p>
+        </header>
+
+        <main>
+            <form id="invitationForm">
+                <div class="form-group">
+                    <label for="eventName">Nome do Evento</label>
+                    <input type="text" id="eventName" name="eventName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventDate">Data do Evento</label>
+                    <input type="datetime-local" id="eventDate" name="eventDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventLocation">Local do Evento</label>
+                    <input type="text" id="eventLocation" name="eventLocation" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="hostName">Nome do Anfitrião</label>
+                    <input type="text" id="hostName" name="hostName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="guestName">Nome do Convidado</label>
+                    <input type="text" id="guestName" name="guestName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="theme">Tema do Convite</label>
+                    <select id="theme" name="theme">
+                        <option value="elegant">Elegante</option>
+                        <option value="modern">Moderno</option>
+                        <option value="classic">Clássico</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="generate-btn">Gerar Convite</button>
+            </form>
+
+            <div id="invitationPreview" class="invitation-preview hidden">
+                <div class="preview-content">
+                    <h2 id="previewEventName"></h2>
+                    <p id="previewDate"></p>
+                    <p id="previewLocation"></p>
+                    <p id="previewHost"></p>
+                    <p id="previewGuest"></p>
+                </div>
+                <button id="downloadBtn" class="download-btn">Baixar Convite</button>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
